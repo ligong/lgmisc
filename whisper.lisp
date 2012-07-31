@@ -1,4 +1,6 @@
-; Chinese whispers
+;; Chinese whispers
+;; A common lisp version follows YiWang's blog
+;; http://cxwangyi.wordpress.com/2012/07/29/chinese-whispers-in-racket-and-go/
 
 (defpackage :whisper (:use :cl :chanl))
 (in-package :whisper)
