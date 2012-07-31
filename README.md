@@ -1,0 +1,4 @@
+lgmisc
+======
+
+misc code snippet 
