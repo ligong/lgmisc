@@ -9,26 +9,30 @@
 #include <time.h>
 
 #define NELEMS(a) (sizeof(a)/sizeof(a[0]))
-#define SWAP(x,y) do{int tmp_ = x; x = y; y = tmp_;}while(0)
+void swap(int *x, int *y)
+{
+  int tmp = *x; *x = *y; *y = tmp;
+}
 
 /*
   Term: "right place": a[i] = i, "wrong place": a[i] != i
-  the while loop executes at most n times because each execution
+  the while loop executes at most n times, because each execution
   puts an element from the "wrong place" into the "right place",
   and there are at most n elements at "wrong place".
-  So, total execution time is for loop(n) + while loop(n) = O(n)
+  So, total execution time is for(n) + while(n) = O(n)
 */
-int find_a_duplicate(int a[], int n)
+int find_duplicate(int a[], int n)
 {
   int i;
-  for(i = 0; i < n; i++)
+  for(i = 0; i < n; i++) {
     /* a[0]..a[i-1] are in right place */
     while(a[i] != i) {
       if (a[i] == a[a[i]])
 	return a[i];
       else
-	SWAP(a[i],a[a[i]]);
+	swap(&a[i],&a[a[i]]);
     }
+  }
   /* a[0]..a[n-1] are in right place
      no duplicate one */
   return -1;
@@ -38,7 +42,7 @@ void shuffle(int a[],int n)
 {
   while(--n > 0) {
     int k = rand() % (n+1);
-    SWAP(a[k],a[n]);
+    swap(&a[k],&a[n]);
   }
 }
 
@@ -50,7 +54,7 @@ int main()
   for(i = 0; i < 10000000; i++) {
     int a[] = {0,1,2,3,4,5,6,7,8,8};
     shuffle(a,NELEMS(a));
-    assert(8 == find_a_duplicate(a,NELEMS(a)));
+    assert(8 == find_duplicate(a,NELEMS(a)));
   }
   return 0;
 }

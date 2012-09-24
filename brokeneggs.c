@@ -10,7 +10,7 @@
 int min(int x, int y) {return x<y?x:y;}
 int max(int x, int y) {return x<y?y:x;}
 
-/* mintrials uses dynamic programming to solve above problem
+/* min_trials uses dynamic programming to solve above problem
    of m floor, n eggs.
    It returns the minimum number of
    trials to determine the highest floor number from which
@@ -19,7 +19,7 @@ int max(int x, int y) {return x<y?y:x;}
    a[i][j] is floor number of the
    first trial when solving the i floor,j eggs problem.
 */
-int mintrials(int m, int n, int a[m+1][n+1])
+int min_trials(int m, int n, int a[m+1][n+1])
 {
   int i,j,k,c,cost;
   int f[m+1][n+1]; // C99's dynamic array feature
@@ -50,6 +50,11 @@ int mintrials(int m, int n, int a[m+1][n+1])
   return f[m][n];
 }
 
+void print_depth(int n)
+{
+  while(n-- > 0) putchar(' ');
+}
+
 /* Based on decision data stored in array a, print the decision tree
    of m floor, n eggs.
    k is first floor's number,i.e. k..m-k+1 floor.
@@ -58,9 +63,8 @@ int mintrials(int m, int n, int a[m+1][n+1])
 */
 void print_decision(int m, int n, int a[m+1][n+1], int k, int d, int t)
 {
-  #define DEPTH(d) do{int i_=d; while(--i_>=0) putchar(' ');}while(0)
   
-  DEPTH(d);
+  print_depth(d);
   if (n == 1)
     printf("Drop egg from floor %d to %d until egg is broken. Done,maximum %d trials\n", k, m+k-1,t+m);
   else if (m == 1)
@@ -68,10 +72,10 @@ void print_decision(int m, int n, int a[m+1][n+1], int k, int d, int t)
   else {
     int i = a[m][n];
     printf("Drop egg from %d floor\n", k+i-1);
-    DEPTH(d);
+    print_depth(d);
     printf("If broken:\n");
     print_decision(i-1,n-1,a,k,d+2,t+1);
-    DEPTH(d);
+    print_depth(d);
     printf("If not broken:\n");
     print_decision(m-i,n,a,k+i,d+2,t+1);
   }
@@ -81,7 +85,7 @@ int main()
 {
   int m = 100, n = 2;
   int a[m+1][n+1]; // C99' dynamic array
-  printf("%d floor, %d eggs: %d trials\n", m,n,mintrials(m,n,a));
+  printf("%d floor, %d eggs: %d trials\n", m,n,min_trials(m,n,a));
   print_decision(m,n,a,1,0,0);
   return 0;
 }
