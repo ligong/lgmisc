@@ -19,7 +19,7 @@ void swap(int *x, int *y)
   the while loop executes at most n times, because each execution
   puts an element from the "wrong place" into the "right place",
   and there are at most n elements at "wrong place".
-  So, total execution time is for(n) + while(n) = O(n)
+  Side effect: parameter a is changed
 */
 int find_duplicate(int a[], int n)
 {
