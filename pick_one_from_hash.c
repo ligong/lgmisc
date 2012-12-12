@@ -20,7 +20,7 @@
 // to be picked
 // That is, Pr(any element e is picked) = 1 / m, m is the total number of elements
 
-// Declare Pr(bucket i is finally picked) = n_i / m
+// Claim Pr(bucket i is finally picked) = n_i / m
 // Proof:
 //   Pr(bucket i is finally picked) = Pr(bucket i is picked AND
 //                                    bucket i+1 is not picked... AND
