@@ -6,6 +6,7 @@ http://weibo.com/1929644930/zaKmuoRRJ
 
 
 I wrote a s-exp reader prototype, partially because I'll need the similar functionality in a personal project, partically because it is just fun.  
+Do not support garbage collection yet
 
 Compile
 ===================
@@ -24,4 +25,6 @@ value:
 value:
 (2 3 (a b c (5 6 (b)) 9 9 2.700000))
 > 
+
+
 
