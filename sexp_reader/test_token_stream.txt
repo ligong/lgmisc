@@ -1,0 +1,1 @@
+12345 foo "test test" "" "foo\\bar" 3.14159
