@@ -1,6 +1,9 @@
 #include "sexp.h"
 #include <assert.h>
+#include <string.h>
+
 #include "mem.h"
+#include "utils.h"
 
 #define T SExp_T
 
@@ -45,7 +48,8 @@ T SExp_new_string(Token_T t)
   assert(t.value.str != NULL);
   NEW(sexp);
   sexp->type = SEXP_STRING;
-  sexp->value.str = t.value.str;
+  if ((sexp->value.str = strdup(t.value.str)) == NULL)
+    READ_ERR("out of memory");
   return sexp;
 }
       

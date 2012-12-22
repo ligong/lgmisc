@@ -2,8 +2,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+OPT ?= -g2
 
-GTEST_PATH = /your/gtest/path
+# CHANGE following configuration for google's test framework
+GTEST_PATH = /path/to/gtest
 
 TEST_LIB = $(GTEST_PATH)/libgtest.a -lpthread
 
@@ -18,13 +20,14 @@ TEST_C_SOURCES += symbol.c mem.c token_stream.c sexp.c reader.c
 OBJECTS = $(SOURCES:.c=.o)
 TEST_OBJECTS = $(TEST_CXX_SOURCES:.cc=.o) $(TEST_C_SOURCES:.c=.o) 
 
-test: $(TEST_OBJECTS)
-	$(CXX) $(CXXFLAGS) $(TEST_OBJECTS) -o test $(TEST_LIB)
-
 all: readsexp
 
 readsexp: $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o readsexp
+
+test: $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(TEST_OBJECTS) -o test $(TEST_LIB)
+
 
 .cc.o:
 	$(CXX) $(CXXFLAGS) -c $< -o $@
